@@ -1,6 +1,148 @@
-<h1>
+<!DOCTYPE html>
+<html lang="en">
 
-"THE ONLY WAY TO DO GREAT WORK IS TO LOVE WHAT YOU DO"
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boston House Price Prediction</title>
 
-</h1>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Arimo&family=Hind:wght@300&family=Open+Sans+Condensed:wght@300&display=swap" rel="stylesheet">
 
+  <style>
+    /* Basic Styles */
+    body {
+      font-family: 'Arimo', sans-serif;
+      background: linear-gradient(to right, #76b852, #8DC26F);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+    }
+
+    .login {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .login h1 {
+      font-family: 'Pacifico', sans-serif;
+      font-size: 32px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    form input[type="text"] {
+      width: 48%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+      background-color: #f4f4f4;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    form input[type="text"]:focus {
+      outline: none;
+      border: 2px solid #76b852;
+    }
+
+    button {
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: #76b852;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #8DC26F;
+    }
+
+    .prediction-result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .login {
+        padding: 20px;
+        width: 80%;
+      }
+
+      .login h1 {
+        font-size: 28px;
+      }
+
+      form input[type="text"] {
+        width: 100%; /* Make inputs full width on small screens */
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="login">
+    <h1>Boston House Price Prediction</h1>
+
+    <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}" method="post" class="form-container">
+      <!-- First Column -->
+      <div class="left-column">
+        <input type="text" name="CRIM" placeholder="CRIM" required="required" />
+        <input type="text" name="ZN" placeholder="ZN" required="required" />
+        <input type="text" name="INDUS" placeholder="INDUS" required="required" />
+        <input type="text" name="CHAS" placeholder="CHAS" required="required" />
+        <input type="text" name="NOX" placeholder="NOX" required="required" />
+        <input type="text" name="RM" placeholder="RM" required="required" />
+      </div>
+
+      <!-- Second Column -->
+      <div class="right-column">
+        <input type="text" name="Age" placeholder="Age" required="required" />
+        <input type="text" name="DIS" placeholder="DIS" required="required" />
+        <input type="text" name="RAD" placeholder="RAD" required="required" />
+        <input type="text" name="TAX" placeholder="TAX" required="required" />
+        <input type="text" name="PTRATIO" placeholder="PTRATIO" required="required" />
+        <input type="text" name="B" placeholder="B" required="required" />
+        <input type="text" name="LSTAT" placeholder="LSTAT" required="required" />
+      </div>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <!-- Prediction Result Display -->
+    <div class="prediction-result">
+      {{ prediction_text }}
+    </div>
+  </div>
+
+</body>
+
+</html>
